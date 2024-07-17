@@ -6,9 +6,6 @@ dotenv.config();
 const userMail = process.env.EMAIL_USER;
 const userPassword = process.env.EMAIL_PASS;
 
-// ACCOUNT_SID = AC76f0e7bf4823380dd77fd12a41806261
-// AUTH_TOKEN = 75ea2a9f9efc3b1a2f79007dada0185d
-// TWILIO_NUM = +17606793242
 
 const accountSid = process.env.ACCOUNT_SID;
 const accountAuthToken = process.env.AUTH_TOKEN;

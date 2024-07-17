@@ -33,10 +33,9 @@ export const userRegister = async (req, res) => {
             });
         }
         const otp1 = generateOtp();
-        const otp1Expiration = new Date(Date.now() + 30 * 1000); // OTP valid for 10 minutes
-
         const otp2 = generateOtp();
-        const otp2Expiration = new Date(Date.now() + 30 * 1000); // OTP valid for 10 minutes
+        const otp1Expiration = new Date(Date.now() + 1* 60 * 1000); // OTP valid for 30 sec
+        const otp2Expiration = new Date(Date.now() + 1* 60 * 1000); // OTP valid for 30 sec10 minutes
 
         // Hash the password
         const hashPassword = bcrypt.hashSync(password, 10);

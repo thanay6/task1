@@ -2,12 +2,54 @@ import express from 'express';
 import connectDB from './utils/dbConne.mjs';
 import dotenv from 'dotenv';
 import session from 'express-session';
+import swaggerJSDoc from 'swagger-jsdoc';
+import swaggerUi from 'swagger-ui-express';
+
+
+const app = express();
+
+const options = {
+    swaggerDefinition: {
+      openapi: '3.0.0',
+      info: {
+        title: "Swagger Documentation",
+        version: '1.0.0',
+        description: 'API documentation using Swagger'
+      },
+      servers: [
+        {
+          url: 'http://localhost:5000'
+        }
+      ],
+      components: {
+        securitySchemes: {
+          AuthToken: { 
+            type: 'apiKey',
+            in: 'header',
+            name: 'auth-token', 
+          },
+        },
+      },
+      security: [
+        {
+          AuthToken: [] 
+        }
+      ],
+    },
+    apis: [
+      './routers/*.mjs'
+    ],
+  };
+
+const swaggerSpec = swaggerJSDoc(options);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+app.use(express.json());
 
 
 import adminRoutes from './routers/adminRouter.mjs'
 import userRoutes from './routers/userRouter.mjs'
 
-const app = express();
 
 app.use(session({
     secret: process.env.SESSION_SECRET,
